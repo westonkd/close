@@ -120,22 +120,35 @@ public:
     ***************************************************************************/
    bool isReflexive()
    {
-      return false; 
+      //if we ever hit a '0' in the diagonal, return false
+      for (int i = 0; i < mSize; i++)
+         if (!mMatrix[i][i])
+            return false;
+      return true; 
    }
 
    bool isIrreflexive()
    {
-      return false;
+      //if we ever hit a '1' in the diagonal, return true
+      for (int i = 0; i < mSize; i++)
+         if (mMatrix[i][i])
+            return false;
+      return true;
    }
 
    bool isNonreflexive()
    {
-      return false;
+      return !isReflexive();
    }
 
    bool isSymmetric()
    {
-      return false;
+      for (int i = 0; i < mSize; i++)
+         for (int j = 0; j < mSize; j++)
+            if (mMatrix[i][j])
+               if (!mMatrix[j][i])
+                  return false; 
+      return true;
    }
 
    bool isAntisymmetric()
