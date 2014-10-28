@@ -143,17 +143,26 @@ public:
 
    bool isSymmetric()
    {
+      //check every entry
       for (int i = 0; i < mSize; i++)
          for (int j = 0; j < mSize; j++)
-            if (mMatrix[i][j])
-               if (!mMatrix[j][i])
-                  return false; 
+            //if the entry is true, make sure its inverse is as well
+            if (mMatrix[i][j] && !mMatrix[j][i])
+               return false; 
+
       return true;
    }
 
    bool isAntisymmetric()
    {
-      return false;
+      //check every value
+      for (int i = 0; i < mSize; i++)
+         for (int j = 0; j < mSize; j++)
+            //if the value is true, make sure the inverse value is NOT
+            if (jMatrix[i][j] && jMatrix[j][i])
+               return false
+
+      return true;
    }
 
    bool isAsymmetric()
