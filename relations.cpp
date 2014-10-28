@@ -167,7 +167,8 @@ public:
 
    bool isAsymmetric()
    {
-      return false;
+      //Asymmetric = antisymmetric and irreflexive
+      return isAntisymmetric() && isIrreflexive();
    }
 
    bool isTransitive()
