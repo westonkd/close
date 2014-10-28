@@ -159,7 +159,7 @@ public:
       for (int i = 0; i < mSize; i++)
          for (int j = 0; j < mSize; j++)
             //if the value is true, make sure the inverse value is NOT
-            if (jMatrix[i][j] && jMatrix[j][i])
+            if (jMatrix[i][j] && Matrix[j][i])
                return false
 
       return true;
