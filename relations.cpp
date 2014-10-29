@@ -138,7 +138,7 @@ public:
 
    bool isNonreflexive()
    {
-      return !isReflexive();
+      return !isReflexive() && !isIrreflexive();
    }
 
    bool isSymmetric()
