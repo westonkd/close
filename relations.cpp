@@ -54,11 +54,11 @@ public:
          }
          delete [] mMatrix;
          init();
-         for (int x = 0; x < mSize; x++)
+         for (int col = 0; col < mSize; col++)
          {
-            for (int y = 0; y < mSize; y++)
+            for (int row = 0; row < mSize; row++)
             {
-               mMatrix[x][y] = rtSide[x][y];
+               mMatrix[col][row] = rtSide[col][row];
             }
          }
       }
@@ -159,7 +159,7 @@ public:
       for (int i = 0; i < mSize; i++)
          for (int j = 0; j < mSize; j++)
             //if the value is true, make sure the inverse value is NOT
-            if (mMatrix[i][j] && mMatrix[j][i])
+            if (mMatrix[i][j] && mMatrix[j][i] && i != j)
                return false;
 
       return true;
@@ -176,15 +176,7 @@ public:
    void describe();
 };
 
-Relation operator*(Relation& r1, Relation& r2)
-{
-   //Boolean square of r1
-   Relation product = Relation(r1);
 
-   
-   //return the new relation matrix
-   return product;
-}
 
 ostream& operator<<(ostream& os, const Relation& relation)
 {
@@ -223,6 +215,41 @@ bool Relation::isTransitive()
             return false;
 
    return true;
+}
+
+Relation operator*(Relation& r1, Relation& r2)
+{
+   //Boolean square of r1
+   Relation product = Relation(r1);
+
+   int size = r1.getConnectionMatrixSize();
+   
+   //Loop through all columns
+   for(int col = 0; col < size; col++)
+   {
+      //Loop through every row
+      for(int row = 0; row < size; row++)
+      {
+         //Sum, or boolean OR of each col
+         bool sum = false;
+
+         //check every element
+         for(int i = 0; i < size; i++)
+         {
+            //AND together each inverse pair
+            if(r1[i][row] && r1[col][i])
+            {
+               //if one of the ANDed pairs is true, all the OR will be as well
+               sum = true;
+               break;
+            }
+         }
+         product[col][row] = sum;
+      }
+   }
+
+   //return the new relation matrix
+   return product;
 }
 
 void Relation::describe()
