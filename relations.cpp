@@ -181,30 +181,7 @@ Relation operator*(Relation& r1, Relation& r2)
    //Boolean square of r1
    Relation product = Relation(r1);
 
-   //loop through r1
-   for(int x = 0; x < product.getConnectionMatrixSize(); x++)
-   {
-      for(int y = 0; y < product.getConnectionMatrixSize(); y++)
-      {
-         //sum of rows
-         bool sum = false;
-
-         // Go through the entire row/column and check each element
-         for(int j = 0; j < 4; j++)
-         {
-            if(r1[j][y] && r1[x][j])
-            {
-               //sum is true
-               sum = true;
-
-               //if one is  true, the entire sum is true. stop looping
-               break;
-            }
-         }
-         product[x][y] = sum;
-      }
-   }
-
+   
    //return the new relation matrix
    return product;
 }
